@@ -15,7 +15,9 @@ public class WeatherActivity extends AppCompatActivity {
         Log.i(null, "onCreate");
 
         ForecastFragment ff = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.container, ff).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frag_forecaset, ff, null).commit();
+        WeatherFragment wf = new WeatherFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.frag_weather, wf, null).commit();
     }
 
     @Override

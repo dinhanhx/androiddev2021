@@ -1,52 +1,83 @@
 package vn.edu.usth.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
+
+import com.google.android.material.tabs.TabLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeatherActivity extends AppCompatActivity {
+
+    private TabLayout tabLayout;
+    private ViewPager vp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-        Log.i(null, "onCreate");
+//        ForecastFragment ff = new ForecastFragment();
+//        getSupportFragmentManager().beginTransaction().add(R.id.frag_forecaset, ff, null).commit();
+//        WeatherFragment wf = new WeatherFragment();
+//        getSupportFragmentManager().beginTransaction().add(R.id.frag_weather, wf, null).commit();
 
-        ForecastFragment ff = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.frag_forecaset, ff, null).commit();
-        WeatherFragment wf = new WeatherFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.frag_weather, wf, null).commit();
+//        WeatherAndForecastFragment waf = new WeatherAndForecastFragment();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.container, waf).commit();
+
+        vp = (ViewPager) findViewById(R.id.viewPager);
+        addTabs(vp);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(vp);
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(null, "onStart");
+    private void addTabs(ViewPager viewPager)
+    {
+        ViewPagerAdapter vap = new ViewPagerAdapter(getSupportFragmentManager());
+        vap.addFrag(new WeatherAndForecastFragment(), "One");
+        vap.addFrag(new WeatherAndForecastFragment(), "Two");
+        vap.addFrag(new WeatherAndForecastFragment(), "Three");
+        viewPager.setAdapter(vap);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(null, "onResume");
-    }
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List mFragmentList = new ArrayList<>();
+        private final List mFragmentTitleList = new ArrayList<>();
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(null, "onPause");
-    }
+        public ViewPagerAdapter(FragmentManager man)
+        {
+            super(man);
+        }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(null, "onStop");
-    }
+        @Override
+        public Fragment getItem(int position)
+        {
+            return (Fragment) mFragmentList.get(position);
+        }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(null, "onDestroy");
+        @Override
+        public int getCount()
+        {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment frag, String title)
+        {
+            mFragmentList.add(frag);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position)
+        {
+            return (CharSequence) mFragmentTitleList.get(position);
+        }
     }
 }

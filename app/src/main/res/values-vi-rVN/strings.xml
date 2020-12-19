@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USTH Weather</string>
+    <string name="Mon" translatable="true">Thứ 2</string>
+    <string name="Tue" translatable="true">Thứ 3</string>
+    <string name="Wed" translatable="true">Thứ 4</string>
+    <string name="Sunny" translatable="true">Nắng</string>
+    <string name="Thu" translatable="true">Thứ 5</string>
+    <string name="Fri" translatable="true">Thứ 6</string>
+    <string name="Sat" translatable="true">Thứ 7</string>
+    <string name="Sun" translatable="true">Chủ nhật</string>
+</resources>

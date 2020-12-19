@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Mon"
+            android:text="@string/Mon"
             android:textSize="12pt" />
 
         <ImageView
@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Tue"
+            android:text="@string/Tue"
             android:textSize="12pt" />
 
         <ImageView
@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Wed"
+            android:text="@string/Wed"
             android:textSize="12pt" />
 
         <ImageView
@@ -96,7 +96,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Thu"
+            android:text="@string/Thu"
             android:textSize="12pt" />
 
         <ImageView
@@ -123,7 +123,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Fri"
+            android:text="@string/Fri"
             android:textSize="12pt" />
 
         <ImageView
@@ -150,7 +150,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Sat"
+            android:text="@string/Sat"
             android:textSize="12pt" />
 
         <ImageView
@@ -177,7 +177,7 @@
         <TextView
             android:layout_width="24pt"
             android:layout_height="wrap_content"
-            android:text="Sun"
+            android:text="@string/Sun"
             android:textSize="12pt" />
 
         <ImageView

@@ -12,35 +12,36 @@
         android:layout_height="match_parent"
         android:id="@+id/viewPager">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints" />
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/main_container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0pt"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:id="@+id/frag_weather"-->
+<!--                        android:orientation="horizontal" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0pt"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:id="@+id/frag_forecaset"-->
+<!--                        android:orientation="horizontal" />-->
+
+<!--        </LinearLayout>-->
     </androidx.viewpager.widget.ViewPager>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/main_container">
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0pt"-->
-<!--            android:layout_weight="1"-->
-<!--            android:id="@+id/frag_weather"-->
-<!--            android:orientation="horizontal" />-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0pt"-->
-<!--            android:layout_weight="1"-->
-<!--            android:id="@+id/frag_forecaset"-->
-<!--            android:orientation="horizontal" />-->
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

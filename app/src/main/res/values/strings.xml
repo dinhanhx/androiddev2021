@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">USTH Weather</string>
     <string name="Sunny">Sunny</string>
-    <string name="Mon">Monday</string>
-    <string name="Tue">Tuesday</string>
-    <string name="Wed">Wednesday</string>
-    <string name="Thu">Thursday</string>
-    <string name="Fri">Friday</string>
-    <string name="Sat">Saturday</string>
-    <string name="Sun">Sunday</string>
+    <string name="Mon">Mon</string>
+    <string name="Tue">Tue</string>
+    <string name="Wed">Wed</string>
+    <string name="Thu">Thu</string>
+    <string name="Fri">Fri</string>
+    <string name="Sat">Sat</string>
+    <string name="Sun">Sun</string>
 </resources>

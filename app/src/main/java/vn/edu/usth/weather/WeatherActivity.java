@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -35,6 +36,9 @@ public class WeatherActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(vp);
+
+        MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.intro);
+        mp.start();
 
     }
 

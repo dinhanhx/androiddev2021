@@ -10,6 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -55,10 +58,38 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        final Handler handler_ = new Handler(Looper.getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String content = msg.getData().getString("server_response");
+                Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Bundle bun = new Bundle();
+                bun.putString("server_response", "some thing beyond the sea");
+
+                Message msg = new Message();
+                msg.setData(bun);
+                handler_.sendMessage(msg);
+            }
+        });
+
         switch (item.getItemId()) {
             case R.id.refresh:
             {
-                Toast.makeText(getApplicationContext(), "Not refreshing", Toast.LENGTH_LONG).show();
+                th.start();
                 return true;
             }
 

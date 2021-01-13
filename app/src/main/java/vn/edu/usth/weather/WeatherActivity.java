@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -59,37 +61,38 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        final Handler handler_ = new Handler(Looper.getMainLooper()){
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                String content = msg.getData().getString("server_response");
-                Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        Thread th = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                Bundle bun = new Bundle();
-                bun.putString("server_response", "some thing beyond the sea");
-
-                Message msg = new Message();
-                msg.setData(bun);
-                handler_.sendMessage(msg);
-            }
-        });
-
         switch (item.getItemId()) {
             case R.id.refresh:
             {
-                th.start();
+                AsyncTask<String, Integer, Bitmap> tsk = new AsyncTask<String, Integer, Bitmap>() {
+                    @Override
+                    protected Bitmap doInBackground(String... strings) {
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPreExecute() {
+
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(Integer... values) {
+                        super.onProgressUpdate(values);
+                    }
+
+                    @Override
+                    protected void onPostExecute(Bitmap bitmap) {
+                        Toast.makeText(getApplicationContext(), "something beyond the sky", Toast.LENGTH_LONG).show();
+                    }
+                };
+                tsk.execute("https://usth.edu.vn/uploads/logo_moi-eng.png");
                 return true;
             }
 

@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
@@ -73,59 +78,72 @@ public class WeatherActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.refresh:
             {
-                AsyncTask<String, Integer, Bitmap> tsk = new AsyncTask<String, Integer, Bitmap>() {
-                    Bitmap bitmap1;
-
-                    @SuppressLint("StaticFieldLeak")
+//                AsyncTask<String, Integer, Bitmap> tsk = new AsyncTask<String, Integer, Bitmap>() {
+//                    Bitmap bitmap1;
+//
+//                    @SuppressLint("StaticFieldLeak")
+//                    @Override
+//                    protected Bitmap doInBackground(String... strings) {
+//                        try {
+//                            Thread.sleep(1000);
+//                            URL url = new URL(strings[0]);
+//
+//                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                            connection.setRequestMethod("GET");
+//                            connection.setDoInput(true);
+//                            connection.connect();
+//
+//                            InputStream inputstream = connection.getInputStream();
+//                            bitmap1 = BitmapFactory.decodeStream(inputstream);
+//
+//                            connection.disconnect();
+//                        }
+//                        catch (MalformedURLException e)
+//                        {
+//                            e.printStackTrace();
+//                        }
+//                        catch (IOException e)
+//                        {
+//                            e.printStackTrace();
+//                        }
+//                        catch (InterruptedException e)
+//                        {
+//                            e.printStackTrace();
+//                        }
+//                        return bitmap1;
+//                    }
+//
+//                    @Override
+//                    protected void onPreExecute() {
+//
+//                    }
+//
+//                    @Override
+//                    protected void onProgressUpdate(Integer... values) {
+//                        super.onProgressUpdate(values);
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(Bitmap bitmap) {
+////                        Toast.makeText(getApplicationContext(), "something beyond the sky", Toast.LENGTH_LONG).show();
+//                        ImageView logo = (ImageView) findViewById(R.id.logo);
+//                        logo.setImageBitmap(bitmap);
+//                    }
+//                };
+//                tsk.execute("https://usth.edu.vn/uploads/logo_moi-eng.png");
+                RequestQueue rq = Volley.newRequestQueue(this);
+                Response.Listener<Bitmap> rl = new Response.Listener<Bitmap>() {
                     @Override
-                    protected Bitmap doInBackground(String... strings) {
-                        try {
-                            Thread.sleep(1000);
-                            URL url = new URL(strings[0]);
-
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                            connection.setRequestMethod("GET");
-                            connection.setDoInput(true);
-                            connection.connect();
-
-                            InputStream inputstream = connection.getInputStream();
-                            bitmap1 = BitmapFactory.decodeStream(inputstream);
-
-                            connection.disconnect();
-                        }
-                        catch (MalformedURLException e)
-                        {
-                            e.printStackTrace();
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
-                        catch (InterruptedException e)
-                        {
-                            e.printStackTrace();
-                        }
-                        return bitmap1;
-                    }
-
-                    @Override
-                    protected void onPreExecute() {
-
-                    }
-
-                    @Override
-                    protected void onProgressUpdate(Integer... values) {
-                        super.onProgressUpdate(values);
-                    }
-
-                    @Override
-                    protected void onPostExecute(Bitmap bitmap) {
-//                        Toast.makeText(getApplicationContext(), "something beyond the sky", Toast.LENGTH_LONG).show();
+                    public void onResponse(Bitmap response) {
                         ImageView logo = (ImageView) findViewById(R.id.logo);
-                        logo.setImageBitmap(bitmap);
+                        logo.setImageBitmap(response);
                     }
                 };
-                tsk.execute("https://usth.edu.vn/uploads/logo_moi-eng.png");
+                ImageRequest imageRequest = new ImageRequest(
+                        "https://usth.edu.vn/uploads/logo_moi-eng.png", rl,
+                        0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, null
+                );
+                rq.add(imageRequest);
                 return true;
             }
 

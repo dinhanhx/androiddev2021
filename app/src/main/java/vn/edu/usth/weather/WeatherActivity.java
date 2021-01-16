@@ -7,8 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,9 +19,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,16 +74,38 @@ public class WeatherActivity extends AppCompatActivity {
             case R.id.refresh:
             {
                 AsyncTask<String, Integer, Bitmap> tsk = new AsyncTask<String, Integer, Bitmap>() {
+                    Bitmap bitmap1;
+
+                    @SuppressLint("StaticFieldLeak")
                     @Override
                     protected Bitmap doInBackground(String... strings) {
                         try {
                             Thread.sleep(1000);
+                            URL url = new URL(strings[0]);
+
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            connection.setRequestMethod("GET");
+                            connection.setDoInput(true);
+                            connection.connect();
+
+                            InputStream inputstream = connection.getInputStream();
+                            bitmap1 = BitmapFactory.decodeStream(inputstream);
+
+                            connection.disconnect();
+                        }
+                        catch (MalformedURLException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
                         }
                         catch (InterruptedException e)
                         {
                             e.printStackTrace();
                         }
-                        return null;
+                        return bitmap1;
                     }
 
                     @Override
@@ -89,7 +120,9 @@ public class WeatherActivity extends AppCompatActivity {
 
                     @Override
                     protected void onPostExecute(Bitmap bitmap) {
-                        Toast.makeText(getApplicationContext(), "something beyond the sky", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "something beyond the sky", Toast.LENGTH_LONG).show();
+                        ImageView logo = (ImageView) findViewById(R.id.logo);
+                        logo.setImageBitmap(bitmap);
                     }
                 };
                 tsk.execute("https://usth.edu.vn/uploads/logo_moi-eng.png");

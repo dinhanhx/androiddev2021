@@ -13,33 +13,41 @@
         android:scaleType="fitXY"
         android:src="@drawable/frame"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Sunny"
-        android:layout_alignParentLeft="true"
-        android:textSize="12pt"
-        android:id="@+id/first_text"
-        android:layout_alignParentStart="true"
-        android:paddingTop="12pt"
-        android:paddingLeft="12pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weather_info"
+            android:textSize="12pt"
+            android:paddingTop="12pt"
+            android:paddingLeft="12pt"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hanoi"
-        android:layout_alignParentRight="true"
-        android:textSize="12pt"
-        android:id="@+id/second_text"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="12pt"
-        android:paddingRight="16pt"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/Sunny"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:textSize="12pt"-->
+<!--        android:id="@+id/first_text"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:paddingTop="12pt"-->
+<!--        android:paddingLeft="12pt"/>-->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sun"
-        android:layout_below="@+id/first_text"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hanoi"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:textSize="12pt"-->
+<!--        android:id="@+id/second_text"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:paddingTop="12pt"-->
+<!--        android:paddingRight="16pt"/>-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/sun"-->
+<!--        android:layout_below="@+id/first_text"/>-->
 
 
 </RelativeLayout>

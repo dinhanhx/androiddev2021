@@ -21,13 +21,20 @@ import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,6 +71,7 @@ public class WeatherActivity extends AppCompatActivity {
         MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.intro);
         mp.start();
 
+        getWeatherJson();
     }
 
     @Override
@@ -199,5 +207,41 @@ public class WeatherActivity extends AppCompatActivity {
         {
             return (CharSequence) mFragmentTitleList.get(position);
         }
+    }
+
+    private void getWeatherJson()
+    {
+        // e3fc7cd1499bf87b25c7829f2ff41639
+        // hanoi
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=hanoi&appid=e3fc7cd1499bf87b25c7829f2ff41639";
+        JsonObjectRequest js = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        TextView tv = (TextView) findViewById(R.id.weather_info);
+                        String output = "";
+                        try {
+                            String name = response.getString("name");
+                            double temp = response.getJSONObject("main").getDouble("temp");
+
+                            output = name + "\n" +  String.valueOf(temp) + "*F";
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        tv.setText(output);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }
+        );
+
+        RequestQueue rq = Volley.newRequestQueue(this);
+        rq.add(js);
     }
 }
